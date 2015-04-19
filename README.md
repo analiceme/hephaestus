@@ -1,12 +1,5 @@
-Mapa76
-======
-
-This proyect is composed of three applications:
-
-  * [Hephaestus](http://en.wikipedia.org/wiki/Hephaestus): Workers and background tasks
-  * [Aphrodite](http://en.wikipedia.org/wiki/Aphrodite): Web application
-  * [Chaos](http://en.wikipedia.org/wiki/Chaos): Core models and libs
-  * [Aeolus](http://en.wikipedia.org/wiki/Aeolus): JS app
+Analiceme::Hephaestus
+=====================
 
 ## General dependencies
 
@@ -16,28 +9,9 @@ This proyect is composed of three applications:
   * MongoDB server
   * Redis server
   * elasticsearch
-  * Node.js
   * Docsplit
   * FreeLing 3.1
   * Poppler 0.20+
-
-### Ruby 2.1.2 ###
-
-It's highly recommended that you install a Ruby version manager as [RVM](http://rvm.io/) or [Rbenv](https://github.com/sstephenson/rbenv).
-
-    $ \curl -sSL https://get.rvm.io | bash -s stable --ruby
-    $ source ~/.bashrc
-    $ rvm install ruby-2.1.2
-    $ rvm use 2.1.2 --default
-
-We recommend [rvm](https://rvm.io/rvm/install/) for installing and managing the
-Ruby interpreter and environment. Refer to the [installation
-page](https://rvm.io/rvm/install/) for instructions on installing Ruby 2.1.2
-with `rvm`.
-
-### Nokogiri dependencies ###
-
-    # apt-get install libxslt-dev libxml2-dev
 
 ### MongoDB and Redis servers ###
 
@@ -64,13 +38,6 @@ Keep in mind that elasticsearch produces a large amount of logs, so it's a good 
 For more information about this issue, please [read](http://www.elasticsearch.org/tutorials/too-many-open-files/).
 
 There are alternative downloads [here](http://www.elasticsearch.org/download/).
-
-### Install Node.js ###
-
-    $ curl https://raw.github.com/creationix/nvm/v0.3.0/install.sh | sh
-    $ source ~/.bashrc
-    $ nvm install 0.10
-    $ nvm alias default 0.10
 
 ### Docsplit (dependencies) ###
 
@@ -133,24 +100,7 @@ Both, **aphrodite** and **hephaestus** are ruby applications and each one of the
 If the servers will be running on the same machine as Mapa76, you don't need to
 change anything.
 
-### Install Aeoluos dependencies
-
-Just follow the instructions [here](https://github.com/hhba/mapa76/blob/master/aeolus/README.md).
-
 ## Up and Running
-
-You will need to run the aeolus file watcher:
-
-    $ cd aeolus
-    $ grunt w
-
-Fire Rails app:
-
-    $ cd aphrodite
-    $ rails s
-
-To start workers for document processing, you need to run at least one Resque
-worker:
 
     $ cd hephaestus
     $ QUEUE=* bundle exec rake resque:work
@@ -164,7 +114,10 @@ And you also need to `freeling` as a server. The `.sh` file only works in OSX, b
     $ cd hephaestus
     $ sh ./start-freeling.sh
 
-## TODO
+## Deploy
 
-* Split workers from web app.
-* Upgrade to Rails 4.
+Add to `/etc/rc.local`:
+
+    service freeling start
+    su deploy -c /home/deploy/apps/mapa76.info/hephaestus/current/config/rc.local.sh
+
