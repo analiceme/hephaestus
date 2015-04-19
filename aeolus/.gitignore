@@ -1,8 +1,0 @@
-/node_modules
-/testServer/public/dist/**/*
-npm-debug.log
-.project
-/tournaments
-.DS_Store
-environments.yml
-config.json

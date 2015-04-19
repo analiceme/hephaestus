@@ -1,6 +1,0 @@
-
-$(function() {
-
-  require('./AeolusInitializer')();
-
-});
